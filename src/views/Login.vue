@@ -1,7 +1,21 @@
 <template>
     <div>
+    <div>
+        <b-modal id="bv-modal" hide-footer>
+            <template v-slot:modal-title>
+                Login Error
+            </template>
+            <div class="d-block text-center">
+            <p class="lead">{{message}}</p>
+            </div>
+            <b-button class="mt-3" block @click="$bvModal.hide('bv-modal')">Close Me</b-button>
+        </b-modal>
+    </div>
+
+
+    <div>
         <form class="form-signin">
-        <img class="mb-4" src="../assets/cool.png" alt="" width="72" height="72">
+        <img class="mb-4" src="../assets/cool.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" v-model="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
@@ -18,7 +32,7 @@
         </form>
         <p>{{email}}, {{password}}, {{remember}}</p>
     </div>
-
+    </div>
 </template>
 
 <script>
@@ -26,7 +40,7 @@ export default {
     name: "login",
     data() {
         return {
-            
+           message: "" 
         }
     }, computed: {
         email: {
@@ -55,12 +69,24 @@ export default {
         },
     }, methods: {
         login: function () {
-            this.$store.dispatch('authenticate');
-            if (this.$store.state.failCode == null)
-                this.$router.push('/');
-            else {
-                console.log(this.$store.state.failCode);
-            }
+            return this.$store.dispatch('authenticate').then(() => {
+                let c_code = this.$store.state.code;
+                if (c_code == null) {
+                    this.$router.push("/");
+                }
+                else if (c_code == "auth/invalid-email") {
+                    this.message = "Your email is invalid, please type in a valid email";
+                } else if (c_code == "auth/wrong-password") {
+                    this.message= "Your email and password don't match";
+                } else if (c_code === "auth/user-not-found") {
+                    this.message = "No account registered with this email, please register first."
+                } else {
+                    this.message = "there was an error, please try again later";
+                }
+
+                this.$bvModal.show('bv-modal');
+            });
+           
         }
     }
   }
@@ -72,6 +98,8 @@ export default {
   max-width: 330px;
   padding: 15px;
   margin: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 .form-signin .checkbox {
   font-weight: 400;

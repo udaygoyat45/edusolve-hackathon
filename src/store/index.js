@@ -10,7 +10,8 @@ export default new Vuex.Store({
     email: null,
     password: null,
     remember: false,
-    failCode: null,
+    title: null,
+    code: null,
   },
   mutations: {
     updateEmail(state, email) {
@@ -21,33 +22,45 @@ export default new Vuex.Store({
     },
     updateRemember(state, remember) {
       state.remember = remember;
+    },
+    updateTitle(state, title) {
+      state.title = title;
+    }, updateCode(state, code) {
+      state.code = code;
+    }, updateLogged(state, logged) {
+      state.logged = logged;
+    }, clearFields (state) {
+      state.email = null;
+      state.password = null;
+      state.remember = null;
+      state.title = null;
+      state.code = null;
     }
   },
   actions: {
-    authenticate(context) {
-      console.log(context.state.email, context.state.password);
-      firebase.auth().signInWithEmailAndPassword(context.state.email, context.state.password).then(() => {
-        context.state.failCode =  null;
-        context.state.logged = true; 
+    authenticate: context => {
+      return firebase.auth().signInWithEmailAndPassword(context.state.email, context.state.password).then(() => {
+        context.commit('updateCode', null);
+        context.commit('updateLogged', true);
       }).catch(err => {
-        console.log(err.code);
-        context.state.failCode = err.code;
+        context.commit('updateCode', err.code);
       });
     },
     logout(context) {
-      firebase.auth().signOut();
-      context.state.logged = false;
+      return firebase.auth().signOut().then(() => {
+        context.commit('updateLogged', false);
+      });
     },
     register(context) {
-        firebase.auth().createUserWithEmailAndPassword(context.state.email, context.state.password)
+        return firebase.auth().createUserWithEmailAndPassword(context.state.email, context.state.password)
         .then(
           () => {
-            context.state.failCode = null;
+          context.commit('updateCode', null);
           }
         ) 
         .catch(
           error => {
-            context.state.failCode = error.code;
+          context.commit('updateCode', error.code);
           }
         ); 
     }

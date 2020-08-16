@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Search from '../views/Search.vue'
 import Register from '../views/Register.vue'
+import Logistics from '../views/Logistics.vue'
+import Profile from "../views/Profile.vue"
 
 Vue.use(VueRouter)
 
@@ -29,9 +31,19 @@ Vue.use(VueRouter)
     component: Search
   },
   {
+    path: "/logistics",
+    name: "Logistics",
+    component: Logistics
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/profile',
+    name: "Profile",
+    component: Profile
   }
 ]
 

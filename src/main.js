@@ -34,6 +34,13 @@ window.db = db;
 
 Vue.config.productionTip = false
 
+firebase.auth().onAuthStateChanged(auth => {
+  if (auth == null)
+    store.commit("updateLogged", false);
+  else
+    store.commit("updateLogged", true);
+})
+
 new Vue({
   router,
   store,
