@@ -19,53 +19,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Massage Therapy 101</td>
-                  <td>$100</td>
-                  <td>4.9</td>
-                  <td>61</td>
-                </tr>
-                <tr>
-                  <td>Back Massage Lesson</td>
-                  <td>$40</td>
-                  <td>4.9</td>
-                  <td>63</td>
-                </tr>
-                <tr>
-                  <td>Acupuncture Lesson</td>
-                  <td>$60</td>
-                  <td>4.6</td>
-                  <td>66</td>
-                </tr>
-                <tr>
-                  <td>Thai Massage</td>
-                  <td>$100</td>
-                  <td>4.5</td>
-                  <td>22</td>
-                </tr>
-                <tr>
-                  <td>Chinese Massage</td>
-                  <td>$90</td>
-                  <td>4.5</td>
-                  <td>33</td>
-                </tr>
-                <tr>
-                  <td>Indian Massage</td>
-                  <td>$80</td>
-                  <td>4.5</td>
-                  <td>61</td>
-                </tr>
-                <tr>
-                  <td>Oil Massage</td>
-                  <td>$10</td>
-                  <td>4.5</td>
-                  <td>59</td>
-                </tr>
-                <tr>
-                  <td>Acupuncture Basics</td>
-                  <td>$30</td>
-                  <td>4.5</td>
-                  <td>55</td>
+                <tr v-for="data in service_data" v-bind:key="data">
+                  <td>{{data.title}}</td>
+                  <td>{{data.price}}</td>
+                  <td>{{data.rating}}</td>
+                  <td>{{data.count}}</td>
                 </tr>
               </tbody>
             </table>
@@ -81,9 +39,29 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
-    
+    data() {
+      return {
+        service_data: null,
+      }
+    },
+    methods: {
+      logistics: function () {
+         firebase.firestore().collection('logistics').get().then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                console.log(doc.data());
+                    if (doc.data() != undefined && doc.data().email == this.$store.state.email) {
+                        current_data = doc.data();
+                        this.service_data = snapshot;
+                    }
+                })});
+      }
+    }
 }
+
+
 </script>
 
 <style scoped>

@@ -30,39 +30,18 @@
         </div>
 
         <div class="text-center display-4">Your Services</div>
-
         <div class="container">
             
        <div class="p-3">
   <b-card-group deck>
-    <b-card title="Massage Therapy: $45" img-src="https://images.unsplash.com/photo-1515377905703-c4788e51af15" img-alt="Image" img-top>
-      <b-card-text>Requires two partners. Follow the instructions via a zoom call. </b-card-text>
+    <b-card for-each="service in services" title="{{service.title}}: {{service.price}}" img-src="{{service.url}}" img-alt="Image" img-top>
+      <b-card-text>{{service.description}}</b-card-text>
       <template v-slot:footer>
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <small class="text-muted">Last updated {{(new Date() - service.time).format("mm")}} mins ago</small>
       </template>
     </b-card>
-
-    <b-card title="Online Massage Lessons: $60" img-src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874" img-alt="Image" img-top>
-      <b-card-text>Learn the fundamentals of massaging and different hand techniques. Focus on thai massage.</b-card-text>
-      <template v-slot:footer>
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </template>
-    </b-card>
-
-    <b-card title="Introduction to Acupuncture: $100" img-src="https://images.unsplash.com/photo-1489659639091-8b687bc4386e" img-alt="Image" img-top>
-      <b-card-text>The introduction to the art of Acupuncture. More focus on the technical aspects of acupuncture.</b-card-text>
-      <template v-slot:footer>
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </template>
-    </b-card>
-  </b-card-group>
-
-  <img class="mx-auto" style="text-align: center; display: block" width="90px" src="../assets/plus.png">
+  <img class="mx-auto" style="text-align: center; display: block; cursor: pointer" v-on:click="add" width="90px" src="../assets/plus.png">
 </div>     
-            
-            
-            
-            
         </div> 
     </div> 
 </template>
@@ -78,19 +57,24 @@ export default {
            current_city: null,
            current_state: null,
            current_services: null,
-           new_service: null
+           new_service: null,
+           current_doc: null,
        }
    },
     methods: {
+        add: function () {
+            this.current_services.push(Object);
+        },
         retrieveData: function () {
             let current_data; 
+
             console.log(this.$store.state.email);
             firebase.firestore().collection('users').get().then((snapshot) => {
                 snapshot.docs.forEach(doc => {
-                // console.log("^^^^^")
                 console.log(doc.data());
                     if (doc.data() != undefined && doc.data().email == this.$store.state.email) {
                         current_data = doc.data();
+                        this.current_doc = snapshot;
                     }
                 })
             }).finally(() => {
@@ -105,6 +89,13 @@ export default {
     },
     created: function () {
         this.retrieveData();
+    },
+    destroyed: function () {
+        firebase.firestore().collection('users').doc(this.current_doc).update({
+            services: this.current_services,
+            state: this.current_state,
+            city: this.current_city
+        });
     }
 }
 </script>
