@@ -11,25 +11,37 @@
 
     <div class="container p-4">
 
-    <div class="jumbotron ">
-  <div class="container">
-
-    <div v-for="result in results" v-bind:key="result">
+        <p class="text-muted text-center">NOTE: The data is static because the person who was responsible for database for the business profiles deleted his database after the hackathon was over. The code was previously dynamic, please check the source code to see the dynamic code, which is commented out. </p>
+    <!-- <div v-for="result in results" v-bind:key="result">
        <h1 class="">{{result.type}}: {{result.title}}</h1>
     <p class="lead">{{result.description}}</p>
     <p class="lead">{{result.contact}}</p>
     <small id="emailHelp" class="form-text text-muted">Click on the title for more information regarding pricing and time of completion</small>
-      </div>
+       </div> -->
+
+  <div class="jumbotron">
+      <h1 class="">Freelance: Rent Consultancy</h1>
+    <p class="lead">I have been a lawyer for rent related issues for 10 years. I have since retired and offer advice on rent especially in tough conditions due to COVID-19. </p>
+    <small id="emailHelp" class="form-text text-muted">Click on the title for more information regarding pricing and time of completion</small>
   </div>
    
-</div>
+  <div class="jumbotron">
+      <h1 class="">Local Law Firm: Rent Consultant Group LLC</h1>
+    <p class="lead">Hello, this is Tom Chen. I have been helping people with rent related issues for 5 years. Our local firm has been able to resolve 90% of clients' cases.</p>
+    <small id="emailHelp" class="form-text text-muted">Click on the title for more information regarding pricing and time of completion</small>
+  </div>
 
-    </div>
+  <div class="jumbotron">
+      <h1 class="">Freelance: Law Ofice of Laureen Cameroon</h1>
+    <p class="lead">Hello, I am offering services on a discount rate. I no longer fight cases from y clients, rather offer advice on how to avoid tough situations regarding housing finances. I am offering lessons and lectures on the fundamentals of housing and real estates on a discounted price. </p>
+    <small id="emailHelp" class="form-text text-muted">Click on the title for more information regarding pricing and time of completion</small>
+  </div>
+  </div> 
 </div>
 </template>
 
 <script>
-import firebase from 'firebase'
+// import firebase from 'firebase'
 export default {
   name: "search",
     data() {
@@ -39,17 +51,17 @@ export default {
       }
     },
     methods: {
-      submit: function() {
-        let words = search.split(" ");
-        for (word of words) {
-          firebase.firestore().collection("services").get().then((snapShot) => {
-            snapShot.docs.forEach(docs => {
-              if (docs.data().title.split(" ").includes(word))
-                results.push(docs.data());
-            }) 
-          })
-        }
-      }
+      // submit: function() {
+      //   let words = search.split(" ");
+      //   for (word of words) {
+      //     firebase.firestore().collection("services").get().then((snapShot) => {
+      //       snapShot.docs.forEach(docs => {
+      //         if (docs.data().title.split(" ").includes(word))
+      //           results.push(docs.data());
+      //       }) 
+      //     })
+      //   }
+      // }
     }
 
     

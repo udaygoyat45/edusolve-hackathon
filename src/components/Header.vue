@@ -2,9 +2,6 @@
     <div>
     <nav class="site-header sticky-top py-1">
       <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <b-navbar-brand href="#">
-            <img src="../assets/cool.svg">
-        </b-navbar-brand>
         <a class="py-2 d-none d-md-inline-block"><router-link to="/">Home</router-link></a>
         <a class="py-2 d-none d-md-inline-block"><router-link to="/about">About</router-link></a>
         <a v-if="logged" class="py-2 d-none d-md-inline-block"><router-link v-if="logged" to="/profile">Profile</router-link></a>

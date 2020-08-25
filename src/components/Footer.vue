@@ -2,7 +2,6 @@
      <footer class="container py-5">
       <div class="row">
         <div class="col-12 col-md">
-            <img src="../assets/cool.svg">
           <small class="d-block mb-3 text-muted">© 2020-2021</small>
         </div>
         <div class="col-6 col-md">

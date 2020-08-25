@@ -15,7 +15,6 @@
 
     <div>
         <form class="form-signin">
-        <img class="mb-4" src="../assets/cool.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" v-model="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
@@ -30,7 +29,6 @@
         <p class="mt-3 mb-1 text-muted">Register</p>
         <p class="mt-1 mb-3 text-muted">© 2020-2021</p>
         </form>
-        <p>{{email}}, {{password}}, {{remember}}</p>
     </div>
     </div>
 </template>

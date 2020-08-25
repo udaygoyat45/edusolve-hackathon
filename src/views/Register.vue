@@ -12,7 +12,6 @@
             </b-modal>
         </div>
         <form class="form-signin">
-        <img class="mb-4" src="../assets/cool.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please Sign Up</h1>
         
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -30,9 +29,7 @@
         <p class="mt-3 mb-1 text-muted"><router-link to="/login">Login</router-link></p>
         <p class="mt-1 mb-3 text-muted">© 2020-2021</p>
         </form>
-        <p>{{email}}, {{password}}</p>
     </div>
-
 </template>
 
 <script>
