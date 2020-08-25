@@ -7,26 +7,26 @@
         <div class="col-6 col-md">
           <h5>Features</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="https://getbootstrap.com/docs/4.0/examples/product/#">Team feature</a></li>
-            <li><a class="text-muted" href="https://getbootstrap.com/docs/4.0/examples/product/#">Stuff for developers</a></li>
+            <li><a class="text-muted" href="https://www.lipsum.com/">Team feature</a></li>
+            <li><a class="text-muted" href="https://www.lipsum.com/">Stuff for developers</a></li>
           </ul>
         </div>
         <div class="col-6 col-md">
           <h5>Resources</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="https://getbootstrap.com/docs/4.0/examples/product/#">Resource</a></li>
+            <li><a class="text-muted" href="https://www.lipsum.com/">Resource</a></li>
           </ul>
         </div>
         <div class="col-6 col-md">
           <h5>Resources</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="https://getbootstrap.com/docs/4.0/examples/product/#">Business</a></li>
+            <li><a class="text-muted" href="https://www.lipsum.com/">Business</a></li>
           </ul>
         </div>
         <div class="col-6 col-md">
           <h5>About</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="https://getbootstrap.com/docs/4.0/examples/product/#">Privacy</a></li>
+            <li><a class="text-muted" href="https://www.lipsum.com/">Privacy</a></li>
           </ul>
         </div>
       </div>
